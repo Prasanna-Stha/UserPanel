@@ -21,6 +21,7 @@ import UpdateUser from "@/components/editUser";
 import { useState } from "react";
 import { AddIcon, DeleteIcon, EditIcon } from "@/assets/svg";
 import DeleteUser from "@/components/deleteUser";
+import Sidebar from "@/components/layout/sidebar/Sidebar";
 
 const HomePage = () => {
   const { data: userList, isLoading } = useGetUserList();
@@ -56,119 +57,129 @@ const HomePage = () => {
   };
 
   return (
-    <Stack p="8" gap={8}>
-      <Button
-        w="fit-content"
-        alignSelf="flex-end"
-        onClick={onAddOpen}
-        colorPalette="cyan"
-      >
-        <AddIcon />
-        Add User
-      </Button>
+    <>
+      <HStack w={"full"} h={"100vh"} overflow={"hidden"} align={"flex-start"}>
+        <Stack w={"300px"} h={'100vh'} position={'sticky'} top={'0'}>
+          <Sidebar />
+        </Stack>
+        <Stack p="8" gap={8} w={"full"} h={'100vh'} overflowY={'auto'}>
+          <Button
+            w="fit-content"
+            alignSelf="flex-end"
+            onClick={onAddOpen}
+            colorPalette="cyan"
+          >
+            <AddIcon />
+            Add User
+          </Button>
 
-      {isLoading ? (
-        <Loading loadingText="Fetching user list..." size="xl" />
-      ) : (
-        <Grid templateColumns="repeat(auto-fill, minmax(350px, 1fr))" gap={6}>
-          {userList?.map((user: User, index: number) => (
-            <CardRoot
-              key={index}
-              _hover={{ cursor: "pointer", bg: "gray.100" }}
-              role="group"
-              className="group"
+          {isLoading ? (
+            <Loading loadingText="Fetching user list..." size="xl" />
+          ) : (
+            <Grid
+              templateColumns="repeat(auto-fill, minmax(350px, 1fr))"
+              gap={6}
             >
-              <CardBody position="relative">
-                <HStack
-                  justify="center"
-                  align="center"
-                  position="absolute"
-                  top={0}
-                  left={0}
-                  w="full"
-                  h="full"
-                  zIndex={1}
+              {userList?.map((user: User, index: number) => (
+                <CardRoot
+                  key={index}
+                  _hover={{ cursor: "pointer", bg: "gray.100" }}
+                  role="group"
+                  className="group"
                 >
-                  <Button
-                    opacity={0}
-                    _groupHover={{ opacity: 1 }}
-                    bg={"blue.500"}
-                    onClick={() => user?.id && handleEdit(user.id)}
-                    size={"sm"}
-                  >
-                    <EditIcon />
-                    Edit
-                  </Button>
-
-                  <Button
-                    opacity={0}
-                    _groupHover={{ opacity: 1 }}
-                    bg={"red.500"}
-                    onClick={() => user?.id && handleDelete(user.id)}
-                    size={"sm"}
-                  >
-                    <DeleteIcon />
-                    Delete
-                  </Button>
-                </HStack>
-
-                <VStack align="start" gap={3} zIndex={0}>
-                  <HStack justify="space-between" w="full">
-                    <CardTitle color="green.500">{user.userName}</CardTitle>
-                    <Badge
-                      colorPalette={
-                        user.gender === "male"
-                          ? "blue"
-                          : user.gender === "female"
-                          ? "pink"
-                          : "green"
-                      }
+                  <CardBody position="relative">
+                    <HStack
+                      justify="center"
+                      align="center"
+                      position="absolute"
+                      top={0}
+                      left={0}
+                      w="full"
+                      h="full"
+                      zIndex={1}
                     >
-                      {user.gender}
-                    </Badge>
-                  </HStack>
+                      <Button
+                        opacity={0}
+                        _groupHover={{ opacity: 1 }}
+                        bg={"blue.500"}
+                        onClick={() => user?.id && handleEdit(user.id)}
+                        size={"sm"}
+                      >
+                        <EditIcon />
+                        Edit
+                      </Button>
 
-                  <CardDescription w="full">
-                    <Stack gap={2}>
-                      <HStack>
-                        <Cake size={16} />
-                        <Text>{user.age} years</Text>
+                      <Button
+                        opacity={0}
+                        _groupHover={{ opacity: 1 }}
+                        bg={"red.500"}
+                        onClick={() => user?.id && handleDelete(user.id)}
+                        size={"sm"}
+                      >
+                        <DeleteIcon />
+                        Delete
+                      </Button>
+                    </HStack>
+
+                    <VStack align="start" gap={3} zIndex={0}>
+                      <HStack justify="space-between" w="full">
+                        <CardTitle color="green.500">{user.userName}</CardTitle>
+                        <Badge
+                          colorPalette={
+                            user.gender === "male"
+                              ? "blue"
+                              : user.gender === "female"
+                              ? "pink"
+                              : "green"
+                          }
+                        >
+                          {user.gender}
+                        </Badge>
                       </HStack>
-                      <HStack>
-                        <Mail size={16} />
-                        <Text>{user.email}</Text>
-                      </HStack>
-                      <HStack>
-                        <Phone size={16} />
-                        <Text>{user.contact}</Text>
-                      </HStack>
-                    </Stack>
-                  </CardDescription>
-                </VStack>
-              </CardBody>
-            </CardRoot>
-          ))}
-        </Grid>
-      )}
 
-      {isAddOpen && <AddUser isOpen={isAddOpen} onClose={onAddClose} />}
+                      <CardDescription w="full">
+                        <Stack gap={2}>
+                          <HStack>
+                            <Cake size={16} />
+                            <Text>{user.age} years</Text>
+                          </HStack>
+                          <HStack>
+                            <Mail size={16} />
+                            <Text>{user.email}</Text>
+                          </HStack>
+                          <HStack>
+                            <Phone size={16} />
+                            <Text>{user.contact}</Text>
+                          </HStack>
+                        </Stack>
+                      </CardDescription>
+                    </VStack>
+                  </CardBody>
+                </CardRoot>
+              ))}
+            </Grid>
+          )}
 
-      {isEditOpen && dataIdentifier && (
-        <UpdateUser
-          isOpen={isEditOpen}
-          onClose={onEditClose}
-          dataIdentifier={dataIdentifier}
-        />
-      )}
+          {isAddOpen && <AddUser isOpen={isAddOpen} onClose={onAddClose} />}
 
-      {isDeleteOpen && dataIdentifier && (
-        <DeleteUser
-          isOpen={isDeleteOpen}
-          onClose={onDeleteClose}
-          dataIdentifier={dataIdentifier}
-        />
-      )}
-    </Stack>
+          {isEditOpen && dataIdentifier && (
+            <UpdateUser
+              isOpen={isEditOpen}
+              onClose={onEditClose}
+              dataIdentifier={dataIdentifier}
+            />
+          )}
+
+          {isDeleteOpen && dataIdentifier && (
+            <DeleteUser
+              isOpen={isDeleteOpen}
+              onClose={onDeleteClose}
+              dataIdentifier={dataIdentifier}
+            />
+          )}
+        </Stack>
+      </HStack>
+    </>
   );
 };
 
