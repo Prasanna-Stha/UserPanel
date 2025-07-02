@@ -21,7 +21,6 @@ import UpdateUser from "@/components/editUser";
 import { useState } from "react";
 import { AddIcon, DeleteIcon, EditIcon } from "@/assets/svg";
 import DeleteUser from "@/components/deleteUser";
-import Sidebar from "@/components/layout/sidebar/Sidebar";
 
 const HomePage = () => {
   const { data: userList, isLoading } = useGetUserList();
@@ -59,10 +58,7 @@ const HomePage = () => {
   return (
     <>
       <HStack w={"full"} h={"100vh"} overflow={"hidden"} align={"flex-start"}>
-        <Stack w={"300px"} h={'100vh'} position={'sticky'} top={'0'}>
-          <Sidebar />
-        </Stack>
-        <Stack p="8" gap={8} w={"full"} h={'100vh'} overflowY={'auto'}>
+        <Stack p="8" gap={8} w={"full"} h={"100vh"} overflowY={"auto"} scrollbar={'hidden'}>
           <Button
             w="fit-content"
             alignSelf="flex-end"

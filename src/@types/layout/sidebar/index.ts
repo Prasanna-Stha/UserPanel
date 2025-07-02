@@ -9,4 +9,5 @@ export type SidebarPropsType = {
 type SubItemsType = {
   name: string;
   icon?: IconType;
+  href: string;
 };

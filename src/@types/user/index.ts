@@ -5,6 +5,7 @@ export type User = {
   contact: string;
   email: string;
   gender: string;
+  isActive: boolean;
 }
 
 export type UserPayloadType = {

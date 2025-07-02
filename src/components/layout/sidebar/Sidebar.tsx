@@ -14,9 +14,8 @@ const Sidebar = () => {
         bg="blue.500"
         color={'white'}
       >
-        <Text fontFamily={"cursive"}>Logo Here</Text>
+        <Text fontFamily={"fantasy"} fontWeight={'bold'}>UserPanel</Text>
       </Stack>
-
       <Stack>
         {SIDEBAR_ITEMS.map((sidebarItem) => (
           <SidebarItem key={sidebarItem.name} {...sidebarItem} />
