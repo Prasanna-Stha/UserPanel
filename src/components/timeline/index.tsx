@@ -32,6 +32,7 @@ const Timeline = () => {
       shadow="md"
       scrollbar={"hidden"}
       position={"relative"}
+      border={"none"}
     >
       <HStack justify={"space-between"}>
         <Heading

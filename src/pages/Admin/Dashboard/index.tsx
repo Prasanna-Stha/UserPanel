@@ -77,7 +77,7 @@ const Dashboard = () => {
         <GridItem colSpan={2}>
           <ChartCard totalUsers={totalUsers} activeUsers={activeUsers} />
         </GridItem>
-        <GridItem>
+        <GridItem colSpan={2}>
           <Timeline />
         </GridItem>
       </Grid>
