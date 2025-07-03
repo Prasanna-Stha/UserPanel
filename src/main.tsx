@@ -13,6 +13,7 @@ createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Provider>
+          
           <App />
         </Provider>
       </BrowserRouter>

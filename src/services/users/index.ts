@@ -1,4 +1,5 @@
 import type { User, UserPayloadType } from "@/@types/user";
+import { errorNotification, successNotification } from "@/utils/notification";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
@@ -22,8 +23,8 @@ const getUserById = (id: string) => {
 export const useGetUserById = (id: string) =>
   useQuery({
     queryKey: ["user", id],
-    queryFn: ()=> getUserById(id),
-    select: (data)=>data?.data,
+    queryFn: () => getUserById(id),
+    select: (data) => data?.data,
   });
 
 const addUser = (data: UserPayloadType) => {
@@ -37,10 +38,13 @@ export const useAddUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: addUser,
-    onSuccess: () =>
-      queryClient.invalidateQueries({
-        queryKey: ["users"],
-      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      successNotification("User added successfully.");
+    },
+    onError: () => {
+      errorNotification("Error occured while adding user.");
+    },
   });
 };
 
@@ -55,10 +59,13 @@ export const useUpdateUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: updateUser,
-    onSuccess: () =>
-      queryClient.invalidateQueries({
-        queryKey: ["users"],
-      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["users"] });
+      successNotification("User data updated successfully.");
+    },
+    onError: () => {
+      errorNotification("Error occured while updating data.");
+    },
   });
 };
 
@@ -72,9 +79,14 @@ export const useDeleteUser = () => {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: deleteUser,
-    onSuccess: () =>
+    onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ["users"],
-      }),
+      });
+      successNotification("User deleted successfully.");
+    },
+    onError: () => {
+      errorNotification("Error occured while deleting user.");
+    },
   });
 };
