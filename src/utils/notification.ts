@@ -21,7 +21,7 @@ const toastError = (message: string) => {
 };
 
 export const successNotification = (message?: string) => {
-  return toastSuccess(message ?? "Successful");
+  return toastSuccess(message ?? "Task Successful Completed");
 };
 
 export const errorNotification = (message?: string) => {

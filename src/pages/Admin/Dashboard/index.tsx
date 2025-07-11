@@ -11,7 +11,7 @@ const Dashboard = () => {
   const { data: users } = useGetUserList();
 
   const totalUsers = users?.length ?? 0;
-  const activeUsers = users?.filter((user: User) => user.isActive).length ?? 0;
+  const activeUsers = users?.filter((user: User) => user?.isActive)?.length ?? 0;
 
   const statCardType = [
     {
