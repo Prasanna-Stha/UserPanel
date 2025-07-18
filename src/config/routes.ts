@@ -6,7 +6,6 @@ export const ROUTES_CONFIG = {
   },
   USER_MANAGEMENT: {
     USER_LIST: "/user-list",
-    ADD_NEW_USER: "/add-newUser",
     ROLES_PERMISSION: "/roles-and-permission",
   },
   ACTIVITY: {

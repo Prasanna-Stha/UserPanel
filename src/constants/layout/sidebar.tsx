@@ -2,7 +2,6 @@ import { ROUTES_CONFIG } from "@/config/routes";
 import {
   FiHome,
   FiUsers,
-  FiUserPlus,
   FiShield,
   FiFileText,
   FiSettings,
@@ -37,11 +36,6 @@ export const SIDEBAR_ITEMS = [
         name: "User List",
         icon: FiUsers,
         href: ROUTES_CONFIG.USER_MANAGEMENT.USER_LIST,
-      },
-      {
-        name: "Add New User",
-        icon: FiUserPlus,
-        href: ROUTES_CONFIG.USER_MANAGEMENT.ADD_NEW_USER,
       },
       {
         name: "Roles & Permissions",
