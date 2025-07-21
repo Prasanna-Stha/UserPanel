@@ -41,7 +41,7 @@ const UpdateUser = ({
         contact: user.contact,
       });
     }
-  }, [user]);
+  }, [reset, user]);
 
   const { mutate: updateUser, isPending } = useUpdateUser();
 
@@ -50,6 +50,7 @@ const UpdateUser = ({
       {
         ...data,
         id: user?.id,
+        isActive: false
       },
       { onSuccess: () => onClose() }
     );
