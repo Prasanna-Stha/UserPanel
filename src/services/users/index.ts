@@ -1,10 +1,11 @@
 import type { User, UserPayloadType } from "@/@types/user";
+import { BASE_URL } from "@/constants/services";
 import { errorNotification, successNotification } from "@/utils/notification";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 
 const getUserList = () => {
-  return axios.get("https://684ecd98f0c9c9848d2924f8.mockapi.io/test/v1/users");
+  return axios.get(`${BASE_URL}`);
 };
 
 export const useGetUserList = () =>
@@ -16,7 +17,7 @@ export const useGetUserList = () =>
 
 const getUserById = (id: string) => {
   return axios.get(
-    `https://684ecd98f0c9c9848d2924f8.mockapi.io/test/v1/users/${id}`
+    `${BASE_URL}/${id}`
   );
 };
 
@@ -29,7 +30,7 @@ export const useGetUserById = (id: string) =>
 
 const addUser = (data: UserPayloadType) => {
   return axios.post(
-    "https://684ecd98f0c9c9848d2924f8.mockapi.io/test/v1/users",
+    `${BASE_URL}`,
     data
   );
 };
@@ -50,7 +51,7 @@ export const useAddUser = () => {
 
 const updateUser = (user: User) => {
   return axios.put(
-    `https://684ecd98f0c9c9848d2924f8.mockapi.io/test/v1/users/${user?.id}`,
+    `${BASE_URL}/${user?.id}`,
     user
   );
 };
@@ -71,7 +72,7 @@ export const useUpdateUser = () => {
 
 const deleteUser = (id: string) => {
   return axios.delete(
-    `https://684ecd98f0c9c9848d2924f8.mockapi.io/test/v1/users/${id}`
+    `${BASE_URL}/${id}`
   );
 };
 
