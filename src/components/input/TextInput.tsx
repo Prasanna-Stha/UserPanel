@@ -1,8 +1,8 @@
 import type { InputFieldProps } from "@/@types/input";
 import { Stack, Input, Text } from "@chakra-ui/react";
-import { Controller } from "react-hook-form";
+import { Controller, type FieldValues } from "react-hook-form";
 
-const TextInput = <T extends Record<string, any>>({
+const TextInput = <T extends FieldValues>({
   placeholder,
   label,
   control,
@@ -17,7 +17,7 @@ const TextInput = <T extends Record<string, any>>({
       </Text>
       <Controller
         control={control}
-        name={name as any}
+        name={name}
         render={({ field: { value, onChange } }) => (
           <Input
             placeholder={placeholder}

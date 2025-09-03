@@ -15,13 +15,14 @@ import {
 import type { ColumnDef } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 import { FiEdit, FiEye, FiTrash2 } from "react-icons/fi";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const UserList = () => {
   const { data = [] } = useGetUserList();
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTab, setActiveTab] = useState("ALL");
   const selectedTab = searchParams.get("active-tab");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (selectedTab) {
@@ -46,26 +47,11 @@ const UserList = () => {
   const [dataIdentifier, setDataIdentifier] = useState("");
 
   const columns: Array<ColumnDef<User>> = [
-    {
-      accessorKey: "id",
-      header: "S.N.",
-    },
-    {
-      accessorKey: "userName",
-      header: "Name",
-    },
-    {
-      accessorKey: "age",
-      header: "Age",
-    },
-    {
-      accessorKey: "gender",
-      header: "Gender",
-    },
-    {
-      accessorKey: "email",
-      header: "Email",
-    },
+    { accessorKey: "id", header: "S.N." },
+    { accessorKey: "userName", header: "Name" },
+    { accessorKey: "age", header: "Age" },
+    { accessorKey: "gender", header: "Gender" },
+    { accessorKey: "email", header: "Email" },
     {
       accessorKey: "isActive",
       header: "Active Status",
@@ -76,10 +62,7 @@ const UserList = () => {
           <Badge colorPalette={"red"}>Inactive</Badge>
         ),
     },
-    {
-      accessorKey: "contact",
-      header: "Contact Number",
-    },
+    { accessorKey: "contact", header: "Contact Number" },
     {
       accessorKey: "Actions",
       header: "Actions",
@@ -91,6 +74,11 @@ const UserList = () => {
             color="gray.500"
             cursor="pointer"
             _hover={{ color: "blue.500" }}
+            onClick={() =>
+              row.original.id &&
+              row.original.userName &&
+              navigate(`/user/${row.original.id}/${row.original.userName}`)
+            }
           />
           <Icon
             as={FiEdit}
@@ -102,7 +90,7 @@ const UserList = () => {
           />
           <Icon
             as={FiTrash2}
-            boxSize={4}   
+            boxSize={4}
             color="red.600"
             cursor="pointer"
             _hover={{ color: "red.500" }}

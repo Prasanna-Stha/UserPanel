@@ -20,4 +20,7 @@ export const ROUTES_CONFIG = {
     USER_REPORT: "/user-reports",
     SYSTEM_REPORT: "/system-reports",
   },
+  PROFILE: {
+    USER_PROFILE: "/user/:userId/:userName"
+  }
 };
